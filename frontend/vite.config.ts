@@ -22,7 +22,7 @@ export default defineConfig({
     // So the frontend can call '/api/...' without CORS headaches.
     proxy: {
       '/api': {
-        target: 'http://localhost:8080',
+        target: 'https://noolix.onrender.com',
         changeOrigin: true,
       },
     },
