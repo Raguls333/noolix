@@ -1,0 +1,14 @@
+import { Router } from "express";
+import { requireAuth } from "../middleware/requireAuth.js";
+import { authorizeFeature } from "../middleware/authorizeFeature.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
+import { FEATURES } from "../constants/features.js";
+import { getBranding, updateBranding, getSlaRules, updateSlaRules, inviteClientPortal, clientPortalLogin, clientPortalCommitments } from "../controllers/premium.controller.js";
+export const premiumRouter=Router();
+premiumRouter.get("/branding", requireAuth, authorizeFeature(FEATURES.BRANDED_PDF), asyncHandler(getBranding));
+premiumRouter.patch("/branding", requireAuth, authorizeFeature(FEATURES.BRANDED_PDF), asyncHandler(updateBranding));
+premiumRouter.get("/sla-rules", requireAuth, authorizeFeature(FEATURES.AUTO_REMINDERS), asyncHandler(getSlaRules));
+premiumRouter.post("/sla-rules", requireAuth, authorizeFeature(FEATURES.AUTO_REMINDERS), asyncHandler(updateSlaRules));
+premiumRouter.post("/client-portal/invite", requireAuth, authorizeFeature(FEATURES.CLIENT_PORTAL), asyncHandler(inviteClientPortal));
+premiumRouter.post("/client-portal/login", asyncHandler(clientPortalLogin));
+premiumRouter.get("/client-portal/commitments", asyncHandler(clientPortalCommitments));

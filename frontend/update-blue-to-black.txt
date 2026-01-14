@@ -1,0 +1,36 @@
+# Files to update from blue (#4F46E5) to black
+
+Files with bg-[#4F46E5] or bg-[#4338CA]:
+1. ✅ FounderDashboard.tsx - Filter badge and Apply button
+2. ✅ DashboardOverview.tsx - Create button
+3. ✅ ClientSignIn.tsx - Logo and submit button
+4. ✅ ResponsiveAppLayout.tsx - Sidebar active states and logo
+5. ManagerDashboard.tsx - Create button, filter badge, Apply button  
+6. DashboardExecutive.tsx - Create button
+7. CommitmentsList.tsx - Create button, filter dot, status filters, pagination
+8. CommitmentDetailView.tsx - Export buttons
+9. ClientsList.tsx - Create button, filters
+10. ClientDetail.tsx - Export button, progress bars, timeline dots
+11. AddClientModal.tsx - Create button
+12. ReportDetailView.tsx - Export button
+13. MastersSettings.tsx - Create buttons
+14. DateRangePicker.tsx - Selected dates
+15. ConfirmModal.tsx - Confirm button
+16. AttachmentPreview.tsx - Download buttons
+17. Pagination.tsx - Active page
+18. ProfilePage.tsx - Save button
+19. ClientApprovalView.tsx - Timeline dots
+20. ClientAcceptanceView.tsx - Accept button
+21. CreateCommitmentWizard.tsx - Info boxes
+22. ProofView.tsx - Status badges
+23. AppLayout.tsx - Active nav (old layout)
+24. Other reports and settings files
+
+Need to replace:
+- bg-[#4F46E5] → bg-black
+- hover:bg-[#4338CA] → hover:bg-black/90
+- border-[#4F46E5] → border-black
+- text-[#4F46E5] → text-black (in some cases)
+- bg-blue-50 → bg-slate-50 (info boxes)
+- border-blue-200 → border-slate-200
+- text-blue-700/800/900 → text-slate-700/800/900

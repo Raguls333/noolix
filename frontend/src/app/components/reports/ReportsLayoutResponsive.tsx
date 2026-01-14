@@ -1,0 +1,79 @@
+import { ReactNode } from "react";
+import { CircleAlert, Clock, Users } from "lucide-react";
+
+interface ReportsLayoutResponsiveProps {
+  children: ReactNode;
+  activeReport: 'revenue-risk' | 'aging' | 'client-behavior';
+  onReportChange: (report: 'revenue-risk' | 'aging' | 'client-behavior') => void;
+  userRole?: 'founder' | 'manager';
+}
+
+export function ReportsLayoutResponsive({ children, activeReport, onReportChange, userRole = 'founder' }: ReportsLayoutResponsiveProps) {
+  const reports = [
+    { id: 'revenue-risk' as const, label: 'Revenue at Risk', shortLabel: 'Risk', icon: CircleAlert },
+    { id: 'aging' as const, label: 'Commitment Aging', shortLabel: 'Aging', icon: Clock },
+    { id: 'client-behavior' as const, label: 'Client Behavior', shortLabel: 'Clients', icon: Users },
+  ];
+
+  return (
+    <div className="h-full flex flex-col bg-[#FAFAFA]">
+      {/* Header */}
+      <div className="bg-white border-b border-[#E5E7EB] px-4 lg:px-10 pt-6 lg:pt-10 pb-0">
+        <div className="max-w-[1600px] mx-auto">
+          <div className="mb-6 lg:mb-8">
+            <h1 className="text-[24px] lg:text-[28px] text-[#0F172A] font-semibold mb-1 tracking-tight">Reports</h1>
+            <p className="text-[14px] lg:text-[15px] text-[#6B7280]">Financial insights and commitment analytics</p>
+          </div>
+
+          {/* Desktop Tabs */}
+          <div className="hidden lg:flex gap-1 -mb-px">
+            {reports.map((report) => {
+              const Icon = report.icon;
+              return (
+                <button
+                  key={report.id}
+                  onClick={() => onReportChange(report.id)}
+                  className={`flex items-center gap-2 px-6 py-3 text-[14px] font-medium border-b-2 transition-colors ${
+                    activeReport === report.id
+                      ? 'border-[#4F46E5] text-[#4F46E5]'
+                      : 'border-transparent text-[#6B7280] hover:text-[#0F172A]'
+                  }`}
+                >
+                  <Icon className="w-[18px] h-[18px]" />
+                  {report.label}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Mobile Tabs */}
+          <div className="lg:hidden flex gap-2 -mb-px overflow-x-auto pb-px">
+            {reports.map((report) => {
+              const Icon = report.icon;
+              return (
+                <button
+                  key={report.id}
+                  onClick={() => onReportChange(report.id)}
+                  className={`flex items-center gap-2 px-4 py-2.5 text-[13px] font-medium rounded-t-lg transition-colors whitespace-nowrap ${
+                    activeReport === report.id
+                      ? 'bg-[#F0F4FF] text-[#4F46E5] border-b-2 border-[#4F46E5]'
+                      : 'text-[#6B7280]'
+                  }`}
+                >
+                  <Icon className="w-4 h-4" />
+                  <span className="sm:hidden">{report.shortLabel}</span>
+                  <span className="hidden sm:inline">{report.label}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="flex-1 overflow-auto">
+        {children}
+      </div>
+    </div>
+  );
+}

@@ -1,0 +1,14 @@
+import { Router } from "express";
+import { asyncHandler } from "../utils/asyncHandler.js";
+import { requireAuth } from "../middleware/requireAuth.js";
+import { authorizeRole } from "../middleware/authorizeRole.js";
+import { authorizeFeature } from "../middleware/authorizeFeature.js";
+import { validate } from "../middleware/validate.js";
+import { createManagerSchema, inviteManagerSchema } from "../validators/user.schema.js";
+import { createManager, listUsers, inviteManager } from "../controllers/users.controller.js";
+import { ROLES } from "../constants/roles.js";
+import { FEATURES } from "../constants/features.js";
+export const usersRouter=Router();
+usersRouter.post("/", requireAuth, authorizeRole([ROLES.FOUNDER]), authorizeFeature(FEATURES.MANAGER_ROLE), validate(createManagerSchema), asyncHandler(createManager));
+usersRouter.post("/invite", requireAuth, authorizeRole([ROLES.FOUNDER]), authorizeFeature(FEATURES.MANAGER_ROLE), validate(inviteManagerSchema), asyncHandler(inviteManager));
+usersRouter.get("/", requireAuth, authorizeFeature(FEATURES.MANAGER_ROLE), asyncHandler(listUsers));

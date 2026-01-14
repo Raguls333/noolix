@@ -1,0 +1,11 @@
+import { Router } from "express";
+import { asyncHandler } from "../utils/asyncHandler.js";
+import { validate } from "../middleware/validate.js";
+import { publicLimiter } from "../middleware/rateLimit.js";
+import { getApprove, postApprove, getAccept, postAccept } from "../controllers/public.controller.js";
+import { publicApproveSchema, publicAcceptSchema } from "../validators/commitment.schema.js";
+export const publicRouter=Router();
+publicRouter.get("/approve/:token", publicLimiter, asyncHandler(getApprove));
+publicRouter.post("/approve/:token", publicLimiter, validate(publicApproveSchema), asyncHandler(postApprove));
+publicRouter.get("/accept/:token", publicLimiter, asyncHandler(getAccept));
+publicRouter.post("/accept/:token", publicLimiter, validate(publicAcceptSchema), asyncHandler(postAccept));

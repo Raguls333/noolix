@@ -1,0 +1,11 @@
+import { Router } from "express";
+import { asyncHandler } from "../utils/asyncHandler.js";
+import { requireAuth } from "../middleware/requireAuth.js";
+import { validate } from "../middleware/validate.js";
+import { createClientSchema, updateClientSchema } from "../validators/client.schema.js";
+import { createClient, listClients, getClient, updateClient } from "../controllers/clients.controller.js";
+export const clientsRouter=Router();
+clientsRouter.post("/", requireAuth, validate(createClientSchema), asyncHandler(createClient));
+clientsRouter.get("/", requireAuth, asyncHandler(listClients));
+clientsRouter.get("/:id", requireAuth, asyncHandler(getClient));
+clientsRouter.patch("/:id", requireAuth, validate(updateClientSchema), asyncHandler(updateClient));

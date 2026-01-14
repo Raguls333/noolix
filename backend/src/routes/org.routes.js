@@ -1,0 +1,1 @@
+import { Router } from 'express'; import { asyncHandler } from '../utils/asyncHandler.js'; import { requireAuth } from '../middleware/requireAuth.js'; import { me } from '../controllers/org.controller.js'; export const orgRouter=Router(); orgRouter.get('/me', requireAuth, asyncHandler(me));

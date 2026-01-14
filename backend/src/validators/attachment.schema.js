@@ -1,0 +1,1 @@
+import { z } from 'zod'; export const completeAttachmentSchema=z.object({body:z.object({attachmentId:z.string().min(1),commitmentId:z.string().min(1)}),params:z.any().optional(),query:z.any().optional(),headers:z.any().optional()});
